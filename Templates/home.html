@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%static 'css/styles.css'%}"/>
+    <link rel="icon" href="{% static 'images/logo.svg'  %}" type="images/logo.svg">
+    <title>Byway</title>
+</head>
+<body>
+    <!-- home section  -->
+    <section id="home">
+        <!-- main section starts -->
+        <section id="main">
+            <header>
+                <section class="wrapper">
+                    <div class="header_cont">
+                        <h1 class="left">
+                            <a href="#">
+                                <div class="logo_container">
+                                    <img src="{%static 'images/logo.svg' %}" alt="Byway Logo"/>
+                                </div>
+                                <span>Byway</span>
+                            </a>
+                        </h1>
+                        <nav>
+                            <div class="right">
+                                <div class="icon_container">
+                                    <div class="icon">
+                                        <img src="{%static 'images/cart.svg' %}" alt="Shopping Cart"/>
+                                    </div>
+                                </div>
+                                <button id="login">Log In</button>
+                                <button id="signup">Sign Up</button>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+            </header>
+                 <!-- spotlight starts -->
+            <section id="spotlight">
+                <section class="wrapper">
+                    <div class="spotlight_cont">
+                        <div class="left">
+                            <h2>Unlock Your Potential with Byway</h2>
+                            <p>Welcome to Byway, where learning knows no bounds. We believe that education is the key to personal and professional growth, and we're here to guide you on your journey to success.</p>
+                            <button id="spotlight_btn">Start your instructor journey</button>
+                        </div>
+                        <div class="right">
+                            <div class="img_cont " >
+                                <img src="{%static 'images/spotlight.png' %}"  alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+                <!-- spotlight ends -->
+        </section>
+        <!-- main section ends -->
+        <!-- count section starts -->
+        <section id="count">
+            <section class="wrapper">
+                <div class="count_cont">
+                    <ul>
+                        <li>
+                            <h2>250+</h2>
+                            <p>Courses by our best mentors</p>
+                        </li>
+                        <li>
+                            <h2>1000+</h2>
+                            <p>Courses by our best mentors</p>
+                        </li>
+                        <li>
+                            <h2>15+</h2>
+                            <p>Courses by our best mentors</p>
+                        </li>
+                        <li>
+                            <h2>2400+</h2>
+                            <p>Courses by our best mentors</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <!-- count section ends -->
+        <!-- categories section starts -->
+        <section id="categories">
+            <section class="wrapper">
+                <div class="categories_cont">
+                    <div class="top">
+                        <h3>Top Categories</h3>
+                        <a href="#">See All</a>
+                    </div>
+                    <div class="bottom">
+                        <div class="bottom_cont">
+                            <ul>
+                                {% for i in cat|slice:":4"  %}
+                                <li>
+                                    <a href="{% url 'bywayapp:ViewCategory' pk=i.id %}">
+                                        <div class="card">
+                                            <div class="icon_cont">
+                                                <img src="{{ i.cat_icon.url }}"  alt="Astrology">
+                                            </div>
+                                            <h4>{{i.cat_name }}</h4>
+                                            <p>
+                                                {% if i.course_count %}
+                                                    {{ i.course_count }} Courses
+                                                {% else %}
+                                                    0 Courses
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- categories section ends -->
+        <!-- courses section starts -->
+        <section id="courses">
+            <section class="wrapper">
+                <div class="courses_cont">
+                    <div class="top">
+                        <h3>Top Courses</h3>
+                        <a href="{% url 'bywayapp:listCourses' %}">See All</a>
+                    </div>
+                    <div class="bottom">
+                        <div class="cards">
+                            <ul>
+                                {% for i in crs|slice:":4" %}
+                                <li>
+                                    <a href="{% url 'bywayapp:singlepage' i.id %}">
+                                        <div class="bg_cont">
+                                            <img src="{{i.course_cover.url}}" alt="Course Image">
+                                        </div>
+                                        <h5>{{ i.course_name }}</h5>
+                                        <span>By {{ i.course_instructor }}</span>
+                                        <div class="rating">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>({{i.course_rating}} Rating) </small>
+                                        </div>
+                                        <p>{{ i.course_duration }}</p>
+                                        <h6>${{ i.course_price }}</h6>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- courses section ends -->
+        <!-- instructor section starts -->
+        <section id="instructors">
+            <section class="wrapper">
+                <div class="instructor_cont">
+                    <div class="top">
+                        <h3>Top Instructors</h3>
+                        <a href="#">See All</a>                       
+                    </div>
+                    <div class="bottom">
+                        <div class="cards">
+                            <ul>
+                                <li>
+                                    <div class="card_top">
+                                        <div class="img_cont">
+                                            <img src="{%static 'images/model-5.jpg' %}" alt="Instructor Photo">
+                                        </div>
+                                        <h5>Ronald Richards</h5>
+                                        <small>UI/UX Designer</small>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <div class="left">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>4.9</small>
+                                        </div>
+                                        <div class="right">
+                                            <small>2400 Students</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card_top">
+                                        <div class="img_cont">
+                                            <img src="{%static 'images/model-5.jpg' %}" alt="Instructor Photo">
+                                        </div>
+                                        <h5>Ronald Richards</h5>
+                                        <small>UI/UX Designer</small>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <div class="left">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>4.9</small>
+                                        </div>
+                                        <div class="right">
+                                            <small>2400 Students</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card_top">
+                                        <div class="img_cont">
+                                            <img src="{%static 'images/model-5.jpg' %}" alt="Instructor Photo">
+                                        </div>
+                                        <h5>Ronald Richards</h5>
+                                        <small>UI/UX Designer</small>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <div class="left">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>4.9</small>
+                                        </div>
+                                        <div class="right">
+                                            <small>2400 Students</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card_top">
+                                        <div class="img_cont">
+                                            <img src="{%static 'images/model-5.jpg' %}" alt="Instructor Photo">
+                                        </div>
+                                        <h5>Ronald Richards</h5>
+                                        <small>UI/UX Designer</small>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <div class="left">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>4.9</small>
+                                        </div>
+                                        <div class="right">
+                                            <small>2400 Students</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card_top">
+                                        <div class="img_cont">
+                                            <img src="{%static 'images/model-5.jpg' %}" alt="Instructor Photo">
+                                        </div>
+                                        <h5>Ronald Richards</h5>
+                                        <small>UI/UX Designer</small>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <div class="left">
+                                            <div class="star_cont">
+                                                <img src="{%static 'images/star.svg' %}" alt="Rating star">
+                                            </div>
+                                            <small>4.9</small>
+                                        </div>
+                                        <div class="right">
+                                            <small>2400 Students</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- instructors section ends -->
+        <!-- customer section starts -->
+        <section id="customer">
+            <section class="wrapper-scroll">
+                <div class="customer_cont">
+                    <div class="top">
+                        <div class="left">
+                            <h5>What Our Customer Say About Us</h5>
+                        </div>
+                        <div class="right">
+                            <button id="left-scroll"><i class="fa fa-angle-left"></i></button>
+                            <button id="right-scroll"><i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="cards" id="slider-cust">
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="quote_img">
+                                    <img src="{%static 'images/quotes.svg' %}" alt="Quotes">
+                                </div>
+                                <p>"Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.</p>
+                                <div class="profile">
+                                    <div class="pro_pic">
+                                        <img src="{%static 'images/customer.jpeg' %}" alt="Customer profile picture">
+                                    </div>
+                                    <div class="details">
+                                        <p>Jane Doe</p>
+                                        <span>Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </section>
+        </section>
+        <!-- customer section ends -->
+        <!-- journey section starts -->
+        <section id="journey">
+            <section class="wrapper">
+                <div class="container">
+                    <div id="right-resp" class="right">
+                        <h5>Become an Instructor</h5>
+                        <p>Instructors from around the world teach millions of students on Byway. We provide the tools and skills to teach what you love</p>
+                        <a href="#">Start Your Instructor Journey 
+                            <span>
+                                <img src="{%static 'images/arrow-right.svg' %}" alt="Arrow right"/>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="left">
+                        <div class="instructor_img">
+                            <img src="{%static 'images/journey-1.png' %}" alt="Model Image">
+                        </div>
+                    </div>
+                    <div class="right" id="right">
+                        <h5>Become an Instructor</h5>
+                        <p>Instructors from around the world teach millions of students on Byway. We provide the tools and skills to teach what you love</p>
+                        <a href="#">Start Your Instructor Journey 
+                            <span>
+                                <img src="{%static 'images/arrow-right.svg' %}" alt="Arrow right"/>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="right">
+                        <h5>Transform your life through education</h5>
+                        <p>Learners around the world are launching new careers, advancing in their fields, and enriching their lives.</p>
+                        <a href="#">Checkout Courses <span><img src="{%static 'images/arrow-right.svg' %}" alt="Arrow right"/></span></a>
+                    </div>
+                    <div class="left dup">
+                        <div class="instructor_image">
+                            <img src="{%static 'images/journey-2.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- journey section ends -->
+        <!-- footer section starts -->
+         <footer>
+            <section class="wrapper">
+                <div class="footer_cont">
+                    <div class="left">
+                        <h1>
+                            <div class="logo_cont">
+                                <img src="{%static 'images/bywaylogo.png' %}" alt="">
+                            </div>
+                        </h1>
+                        <p>Empowering learners through accessible and engaging online education.<br/>Byway is a leading online learning platform dedicated to providing high-quality, flexible, and affordable educational experiences.</p>
+                    </div>
+                    <div class="right">
+                        <div class="footer_data">
+                            <h6>Get Help</h6>
+                            <ul>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Latest Articles</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer_data">
+                            <h6>Programs</h6>
+                            <ul>
+                                <li><a href="#">Art & Design</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">IT & Software</a></li>
+                                <li><a href="#">Languages</a></li>
+                                <li><a href="#">Programming</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer_data">
+                            <h6>Contact Us</h6>
+                            <ul>
+                                <li><a href="#">Address: 123 Main Street, Anytown, CA 12345</a></li>
+                                <li><a href="#">Tel: +(123) 456-7890</a></li>
+                                <li><a href="#">Mail: bywayedu@webkul.in</a></li>
+                            </ul>
+                            <div class="social_icons">
+                                <a href="https://www.facebook.com/">
+                                    <div class="icon_cont">
+                                        <img src="{%static 'images/facebook.png' %}" alt="Facebook"/>
+                                    </div>
+                                </a>
+                                <a href="https://github.com/">
+                                    <div class="icon_cont">
+                                        <img src="{%static 'images/github.png' %}" alt="Github"/>          
+                                    </div>
+                                </a>
+                                <a href="https://www.google.co.in/">
+                                    <div class="icon_cont">
+                                        <img src="{%static 'images/google.png' %}" alt="Google"/>
+                                    </div>
+                                </a>
+                                <a href="https://x.com/?lang=en">
+                                    <div class="icon_cont">
+                                        <img src="{%static 'images/twitter.png' %}" alt="Twitter"/>
+                                    </div>
+                                </a>
+                                <a href="https://www.microsoft.com/en">
+                                    <div class="icon_cont">
+                                        <img src="{%static 'images/microsoft.png' %}" alt="Microsoft"/>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+         </footer>
+        <!-- footer section ends -->
+    </section>
+    <!--home section ends  -->    
+    <script src="{%static 'js/script.js'%}"></script>
+</body>
+</html>
