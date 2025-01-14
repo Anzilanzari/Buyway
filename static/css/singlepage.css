@@ -581,9 +581,10 @@ body{
 /* customer section styling starts */
 #single-page #customer{
     background-color: #F8FAFC;
-    padding: 30px 0px;
+    padding: 36px 92px;
     margin-bottom: 55px;
 }
+
 #single-page #customer .wrapper-scroll .customer_cont{
     display: flex;
     flex-direction: column;
@@ -747,7 +748,7 @@ body{
     border-radius: 8px;
 }
 #single-page #courses .wrapper .courses_cont .bottom .cards ul li a .bg_cont img{
-    width: 100%;
+    width: 108%;
     height: 100%;
 }
 #single-page #courses .wrapper .courses_cont .bottom .cards ul li a h5{

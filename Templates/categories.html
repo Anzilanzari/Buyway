@@ -66,7 +66,7 @@
                                 {% if crs %}
                                 {% for i in crs %}
                                 <li>
-                                    <a href="{% url 'singlepage' i.id %}">
+                                    <a href="{% url 'bywayapp:singlepage' i.id %}">
                                         <div class="bg_cont">
                                             <img src="{{ i.course_cover.url }}" alt="Course Image">
                                         </div>
